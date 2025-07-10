@@ -1,14 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-
-/* Gilroy font - you can upload the font files to static/fonts/ */
-@font-face {
-    font-family: 'Gilroy';
-    src: url('../fonts/Gilroy-Bold.woff2') format('woff2'),
-         url('../fonts/Gilroy-Bold.woff') format('woff');
-    font-weight: bold;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Poppins:wght@700&display=swap');
 
 * {
     margin: 0;
@@ -17,7 +8,8 @@
 }
 
 body {
-    font-family: 'Gilroy', 'Arial', sans-serif;
+    font-family: 'Poppins', 'Arial', sans-serif;
+    font-weight: 700;
     line-height: 1.6;
     color: #333;
 }
