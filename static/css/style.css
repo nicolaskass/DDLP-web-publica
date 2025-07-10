@@ -585,3 +585,49 @@ footer {
 .coming-soon a:hover {
     color: #cc6b00;
 }
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-item {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-item i {
+    font-size: 2.8rem;
+    color: #ff8c00;
+    margin-bottom: 1rem;
+}
+
+.service-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-family: 'Audiowide', cursive;
+}
+
+.service-item p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.service-item ul {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #333;
+}

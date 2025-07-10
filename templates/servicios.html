@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}Servicios - Digital Discos{% endblock %}
@@ -7,89 +6,97 @@
 <section class="page-header">
     <div class="container">
         <h1>Nuestros Servicios</h1>
-        <p>Servicios especializados para amantes de la música</p>
+        <p>Soluciones a medida para los amantes de la música y el audio.</p>
     </div>
 </section>
 
 <section class="services">
     <div class="container">
         <div class="services-grid">
+        <!-- BÚSQUEDA -->
+        <!-- {#
             <div class="service-item">
                 <i class="fas fa-search"></i>
-                <h3>Búsqueda Especializada</h3>
-                <p>¿Buscas un disco específico que no encuentras? Nosotros lo conseguimos por vos.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Búsqueda de discos raros y agotados</li>
-                    <li>Contacto directo con sellos discográficos</li>
-                    <li>Importación de títulos especiales</li>
+                <h3>Ofertas Especializadas</h3>
+                <p>¿Buscás un disco difícil de conseguir? Nosotros lo encontramos por vos.</p>
+                <ul>
+                    <li>Discos raros y agotados</li>
+                    <li>Contacto directo con sellos y coleccionistas</li>
+                    <li>Importación de títulos exclusivos</li>
                     <li>Asesoramiento personalizado</li>
                 </ul>
-            </div>
-            
-            <div class="service-item">
-                <i class="fas fa-tools"></i>
-                <h3>Reparación y Mantenimiento</h3>
-                <p>Servicios técnicos especializados para equipos de audio y discos.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Reparación de tocadiscos</li>
-                    <li>Limpieza profesional de vinilos</li>
-                    <li>Calibración de equipos</li>
-                    <li>Restauración de carátulas</li>
-                </ul>
-            </div>
-            
-            <div class="service-item">
-                <i class="fas fa-exchange-alt"></i>
-                <h3>Compra y Venta</h3>
-                <p>Compramos tu colección o discos individuales. También facilitamos intercambios.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Tasación gratuita de colecciones</li>
-                    <li>Compra de discos usados</li>
-                    <li>Intercambios entre clientes</li>
-                    <li>Consignación de discos raros</li>
-                </ul>
-            </div>
-            
+            </div> #}
+
+<!-- REPARACIÓN -->
+<div class="service-item">
+    <i class="fas fa-tools"></i>
+    <h3>Reparación y Mantenimiento</h3>
+    <p>Cuidamos tu equipo y tu colección con servicios técnicos dedicados.</p>
+    <ul>
+        <li>Reparación y calibración de tocadiscos</li>
+        <li>Limpieza profunda de vinilos y CDs</li>
+        {# <li>Restauración de carátulas y empaques</li> #}
+        <li>Services generales de sistemas de audio Hi-Fi</li>
+    </ul>
+</div>
+
+<!-- COMPRA / VENTA -->
+<div class="service-item">
+    <i class="fas fa-exchange-alt"></i>
+    <h3>Compra y Venta</h3>
+    <p>Compramos tus antiguos sistema de audio, CDs y vinilos.</p>
+    <ul>
+        {# <li>Tasación gratuita</li> #}
+        <li>Compramos los vinilos, CDs, cassettes y equipos que ocupan espacio en tu casa y ya no usás</li>
+        {# <li>Intercambios con otros coleccionistas</li> #}
+        {# <li>Consignación de rarezas</li> #}
+    </ul>
+</div>
+
+
+            <!-- ASESORAMIENTO -->
             <div class="service-item">
                 <i class="fas fa-graduation-cap"></i>
-                <h3>Asesoramiento Musical</h3>
-                <p>Te ayudamos a armar tu colección y descubrir nueva música según tus gustos.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Recomendaciones personalizadas</li>
-                    <li>Armado de colecciones temáticas</li>
-                    <li>Historia y contexto musical</li>
-                    <li>Guías de escucha especializada</li>
+                <h3>Asesoramiento Especializado</h3>
+                <p>Te guiamos en la elección de tu equipo ideal.</p>
+                <ul>
+                    <li>Recomendaciones según tus gustos, necesidades y presupuesto</li>
+                    <li>Explicaciónes teórico-prácticas de conceptos y funcionalidades básicas</li>
+                    <li>Contexto histórico y discográfico</li>
+                    <li>Guías de escucha y descubrimiento</li>
                 </ul>
             </div>
-            
+
+            <!-- ENVÍOS -->
             <div class="service-item">
                 <i class="fas fa-shipping-fast"></i>
                 <h3>Envíos a Todo el País</h3>
-                <p>Llegamos a cualquier rincón de Argentina con nuestro servicio de envíos seguro.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Envíos a toda Argentina</li>
-                    <li>Embalaje especializado</li>
-                    <li>Tracking del pedido</li>
-                    <li>Seguro contra daños</li>
+                <p>Recibí tus vinilos y CDs en cualquier punto de Argentina, de forma segura.</p>
+                <ul>
+                    <li>Envíos a todo el país</li>
+                    <li>Embalaje reforzado</li>
+                    <li>Seguimiento con tracking</li>
+                    <li>Seguro opcional contra daños</li>
                 </ul>
             </div>
-            
+
+            <!-- EVENTOS -->
             <div class="service-item">
                 <i class="fas fa-calendar-alt"></i>
-                <h3>Eventos y Lanzamientos</h3>
-                <p>Organizamos eventos especiales y celebramos los lanzamientos más importantes.</p>
-                <ul style="text-align: left; margin-top: 1rem;">
-                    <li>Listening parties</li>
-                    <li>Presentaciones de artistas</li>
-                    <li>Record Store Day</li>
-                    <li>Charlas y workshops</li>
+                <h3>Digitalizamos tus recuerdos</h3>
+                <p>Digitalizamos tus viejas filmaciones y fotos</p>
+                <ul>
+                    <li>Digitalizamos video en varios formatos (VHS, VHSc, MiniDV, 8mm, Super8, Hi8, entre otros)</li>
+                    <li>Digitalizamos fotos, negativos y diapositivas</li>
+                    <li>Realizamos videos para cumpleaños de 15, casamientos o diferentes eventos con tus fotos</li>
+                    <li>Descargamos la información de tu celular, cds, dvds o pen drives al formato que necesites.</li>
                 </ul>
             </div>
         </div>
-        
-        <div class="coming-soon" style="margin-top: 3rem;">
-            <h3>¿Necesitas alguno de estos servicios?</h3>
-            <p>Contáctanos y contanos qué necesitas. Estamos aquí para ayudarte con cualquier consulta relacionada con música y audio.</p>
+
+        <div class="coming-soon" style="margin-top: 3rem; text-align: center;">
+            <h3>¿Querés acceder a alguno de estos servicios?</h3>
+            <p>Contactanos y contanos en qué te podemos ayudar. Amamos lo que hacemos y nos encanta compartirlo.</p>
             <a href="/contacto" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Contactanos</a>
         </div>
     </div>
