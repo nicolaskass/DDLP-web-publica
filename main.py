@@ -7,9 +7,13 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/catalogo')
-def catalog():
-    return render_template('catalog.html')
+@app.route('/productos')
+def productos():
+    return render_template('productos.html')
+
+@app.route('/servicios')
+def servicios():
+    return render_template('servicios.html')
 
 @app.route('/contacto')
 def contact():
