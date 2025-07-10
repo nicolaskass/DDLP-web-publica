@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Poppins:wght@700&display=swap');
 
 * {
@@ -44,7 +43,7 @@ h1, h2, h3 {
 }
 
 .logo h1 {
-    color: #e50914;
+    color: #ff8c00;
     font-size: 1.5rem;
     font-family: 'Audiowide', cursive;
 }
@@ -71,7 +70,7 @@ h1, h2, h3 {
 }
 
 .nav-link:hover {
-    color: #e50914;
+    color: #ff8c00;
 }
 
 .hamburger {
@@ -170,7 +169,7 @@ h1, h2, h3 {
 
 .cta-button {
     display: inline-block;
-    background: #e50914;
+    background: #ff8c00;
     color: white;
     padding: 12px 30px;
     text-decoration: none;
@@ -180,7 +179,7 @@ h1, h2, h3 {
 }
 
 .cta-button:hover {
-    background: #b8070f;
+    background: #cc6b00;
 }
 
 /* Carousel Navigation */
@@ -196,7 +195,7 @@ h1, h2, h3 {
 }
 
 .carousel-btn {
-    background: rgba(229, 9, 20, 0.8);
+    background: rgba(255, 140, 0, 0.8);
     color: white;
     border: none;
     width: 50px;
@@ -208,7 +207,7 @@ h1, h2, h3 {
 }
 
 .carousel-btn:hover {
-    background: rgba(229, 9, 20, 1);
+    background: rgba(255, 140, 0, 1);
 }
 
 .carousel-dots {
@@ -232,7 +231,7 @@ h1, h2, h3 {
 
 .dot.active,
 .dot:hover {
-    background: #e50914;
+    background: #ff8c00;
 }
 
 /* Features Section */
@@ -263,7 +262,7 @@ h1, h2, h3 {
 
 .feature i {
     font-size: 3rem;
-    color: #e50914;
+    color: #ff8c00;
     margin-bottom: 1rem;
 }
 
@@ -303,7 +302,7 @@ h1, h2, h3 {
 
 .genre-card i {
     font-size: 2.5rem;
-    color: #e50914;
+    color: #ff8c00;
     margin-bottom: 1rem;
 }
 
@@ -348,7 +347,7 @@ h1, h2, h3 {
 
 .product-item i, .service-item i {
     font-size: 3rem;
-    color: #e50914;
+    color: #ff8c00;
     margin-bottom: 1rem;
 }
 
@@ -375,7 +374,7 @@ h1, h2, h3 {
 
 .contact-item i {
     font-size: 1.5rem;
-    color: #e50914;
+    color: #ff8c00;
     margin-right: 1rem;
     margin-top: 0.25rem;
 }
@@ -406,7 +405,7 @@ h1, h2, h3 {
 }
 
 .btn-primary {
-    background: #e50914;
+    background: #ff8c00;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -417,7 +416,7 @@ h1, h2, h3 {
 }
 
 .btn-primary:hover {
-    background: #b8070f;
+    background: #cc6b00;
 }
 
 /* Footer */
@@ -437,7 +436,7 @@ footer {
 .footer-section h3,
 .footer-section h4 {
     margin-bottom: 1rem;
-    color: #e50914;
+    color: #ff8c00;
 }
 
 .social-links {
@@ -452,7 +451,7 @@ footer {
 }
 
 .social-links a:hover {
-    color: #e50914;
+    color: #ff8c00;
 }
 
 .footer-bottom {
@@ -466,7 +465,7 @@ footer {
     .hamburger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -477,33 +476,33 @@ footer {
         text-align: center;
         transition: 0.3s;
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-item {
         margin: 1rem 0;
     }
-    
+
     .hero-content h1 {
         font-size: 2rem;
     }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .cta-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .carousel-nav {
         padding: 0 10px;
     }
-    
+
     .carousel-btn {
         width: 40px;
         height: 40px;
