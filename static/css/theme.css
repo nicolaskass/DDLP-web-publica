@@ -1,0 +1,88 @@
+/* static/css/theme.css */
+
+/* COLORES PRINCIPALES */
+:root {
+  --color-primario: #ff7f00;
+  --color-negro: #000000;
+  --color-blanco: #ffffff;
+
+  --color-amarillo: #ffe600;
+  --color-rojo: #ff0000;
+  --color-verde: #00aa00;
+  --color-azul: #0066ff;
+}
+
+/* BOTONES */
+.btn-primary,
+.cta-button {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover,
+.cta-button:hover {
+  background-color: #e56f00;
+}
+
+/* TÍTULOS GENERALES */
+h1, h2, h3 {
+  color: var(--color-negro);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: var(--color-blanco);
+}
+
+/* SECCIÓN HERO */
+.hero-carousel {
+  background-color: var(--color-negro);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--color-blanco);
+}
+
+/* ENCABEZADOS DE PÁGINA */
+.page-header {
+  background-color: var(--color-negro);
+  color: var(--color-blanco);
+  padding: 4rem 0 2.5rem 0;
+  text-align: center;
+  border-top: 4px solid var(--color-primario); /* Opcional: eliminá esta línea si no querés borde */
+  margin-top: 0;
+  border-bottom: 2px solid var(--color-primario);
+}
+
+.page-header h1,
+.page-header p {
+  color: var(--color-blanco);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+/* Elimina margen superior que genera separación blanca */
+main {
+  margin-top: 0;
+}
+
+.product-item i,
+.service-item i {
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover i,
+.service-item:hover i {
+  transform: scale(1.2);
+}

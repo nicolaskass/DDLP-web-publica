@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -6,14 +5,19 @@
     <div class="hero-carousel">
         <div class="carousel-container">
             <div class="carousel-slide active">
-                <img src="{{ url_for('static', filename='images/hero1.jpg') }}" alt="Digital Discos - Vinilos" onerror="this.style.display='none';">
+                <img src="{{ url_for('static', filename='images/carousel/vinilos2dopiso.jpg') }}" alt="Estantería de vinilos">
                 <div class="carousel-overlay"></div>
             </div>
             <div class="carousel-slide">
-                <img src="{{ url_for('static', filename='images/Primario.png') }}" alt="Digital Discos Logo" onerror="this.style.display='none';">
+                <img src="{{ url_for('static', filename='images/carousel/equipos1.jpg') }}" alt="Equipos de audio clásicos">
                 <div class="carousel-overlay"></div>
-            </div>            <div class="carousel-slide">
-                <img src="{{ url_for('static', filename='images/hero3.jpg') }}" alt="Digital Discos - Colección" onerror="this.style.display='none';">
+            </div>
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='images/carousel/bafles.jpg') }}" alt="Parlantes vintage">
+                <div class="carousel-overlay"></div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='images/carousel/1erpiso.jpg') }}" alt="CDs y cassettes en exposición">
                 <div class="carousel-overlay"></div>
             </div>
         </div>
@@ -25,11 +29,20 @@
             <span class="dot active" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
     </div>
     <div class="hero-content">
-        <h1>Bienvenido a Digital Discos</h1>
-        <p>La mejor música en vinilo, CD y formato digital</p>
+<h1 class="hero-heading">
+  Bienvenido a
+  <span class="brand">
+    <span class="digital">Digital</span>
+    <span class="discos">Discos</span>
+  </span>
+</h1>
+
+
+        <p>La mejor música en vinilo y CD. Sistemas de Audio Vintage Hi-Fi. Digitalizaciones.</p>
         <div class="cta-buttons">
             <a href="/productos" class="cta-button">Productos</a>
             <a href="/servicios" class="cta-button">Servicios</a>
@@ -44,17 +57,17 @@
             <div class="feature">
                 <i class="fas fa-music"></i>
                 <h3>Amplio Catálogo</h3>
-                <p>Miles de títulos en todos los géneros musicales</p>
+                <p>Tenemos más de 30.000 títulos en todos los géneros musicales</p>
             </div>
             <div class="feature">
                 <i class="fas fa-shipping-fast"></i>
-                <h3>Envío Rápido</h3>
-                <p>Entrega en todo el país en 24-48 horas</p>
+                <h3>Envío a todo el país</h3>
+                <p>Entrega de CDs y Vinilos en todo el país</p>
             </div>
             <div class="feature">
                 <i class="fas fa-award"></i>
                 <h3>Calidad Garantizada</h3>
-                <p>Solo productos originales y en perfecto estado</p>
+                <p>Solo productos originales</p>
             </div>
         </div>
     </div>
@@ -64,30 +77,23 @@
     <div class="container">
         <h2>Géneros Populares</h2>
         <div class="genres-grid">
-            <div class="genre-card">
-                <i class="fas fa-guitar"></i>
-                <h3>Rock</h3>
-            </div>
-            <div class="genre-card">
-                <i class="fas fa-drum"></i>
-                <h3>Pop</h3>
-            </div>
-            <div class="genre-card">
-                <i class="fas fa-microphone"></i>
-                <h3>Jazz</h3>
-            </div>
-            <div class="genre-card">
-                <i class="fas fa-headphones"></i>
-                <h3>Electrónica</h3>
-            </div>
-            <div class="genre-card">
-                <i class="fas fa-violin"></i>
-                <h3>Clásica</h3>
-            </div>
-            <div class="genre-card">
-                <i class="fas fa-music"></i>
-                <h3>Nacional</h3>
-            </div>
+            <div class="genre-card"><i class="fas fa-guitar"></i><h3>Rock</h3></div>
+            <div class="genre-card"><i class="fas fa-drum"></i><h3>Pop</h3></div>
+            <div class="genre-card"><i class="fas fa-microphone"></i><h3>Jazz & Blues</h3></div>
+            <div class="genre-card"><i class="fas fa-headphones"></i><h3>Electrónica</h3></div>
+            <div class="genre-card"><i class="fas fa-violin"></i><h3>Clásica</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Rock Nacional</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Brasil</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Románticos</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Latinos</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Folklore</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Tango</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Infantiles</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Soundtracks</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Punk Rock</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Metal</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Reggae</h3></div>
+            <div class="genre-card"><i class="fas fa-music"></i><h3>Música del mundo</h3></div>
         </div>
     </div>
 </section>

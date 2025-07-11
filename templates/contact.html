@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}Contacto - Digital Discos{% endblock %}
@@ -14,42 +13,64 @@
 <section class="contact">
     <div class="container">
         <div class="contact-grid">
-            <div class="contact-info">
+            <!-- INFO -->
+            <div class="contact-info card">
                 <h3>Información de Contacto</h3>
+
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <h4>Dirección</h4>
-                        <p>Av. Corrientes 1234, Buenos Aires, Argentina</p>
+                        <p>
+                            <a href="https://www.google.com/maps?q=Av.+7+531+La+Plata" target="_blank">
+                                Av. 7, 531 (entre 42 y 43), La Plata, Buenos Aires, Argentina
+                            </a>
+                        </p>
                     </div>
                 </div>
+
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
                     <div>
-                        <h4>Teléfono</h4>
-                        <p>+54 11 1234-5678</p>
+                        <h4>Whatsapp</h4>
+                        <p>
+                            <a href="https://wa.me/542215618670?text=Hola!%20Quisiera%20hacer%20una%20consulta%20sobre..." target="_blank">
+                                +54 221 561-8670
+                            </a>
+                        </p>
                     </div>
                 </div>
+
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <div>
                         <h4>Email</h4>
-                        <p>info@digitaldiscos.com.ar</p>
+                        <p>
+                            <a href="mailto:digitaldiscos.tiendavirtual@gmail.com">
+                                digitaldiscos.tiendavirtual@gmail.com
+                            </a>
+                        </p>
                     </div>
                 </div>
+
                 <div class="contact-item">
                     <i class="fas fa-clock"></i>
                     <div>
                         <h4>Horarios</h4>
-                        <p>Lunes a Viernes: 9:00 - 18:00<br>
-                        Sábados: 9:00 - 14:00</p>
+                        <p>
+                            <strong>Lunes a Viernes:</strong><br>
+                            <span class="horario">10:00 – 13:00</span> &nbsp;|&nbsp;
+                            <span class="horario">15:00 – 19:00</span><br>
+                            <strong>Sábados:</strong> <span class="horario">10:00 – 13:00</span>
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="contact-form">
+            <!-- FORM -->
+            <div class="contact-form card">
                 <h3>Envíanos un Mensaje</h3>
-                <form>
+                <form id="contactForm" onsubmit="enviarPorWhatsApp(event)">
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" id="name" name="name" required>
@@ -68,8 +89,54 @@
                     </div>
                     <button type="submit" class="btn-primary">Enviar Mensaje</button>
                 </form>
+                <p id="success-msg" style="display: none; margin-top: 1rem; color: green; font-weight: bold;">
+                    Redirigiendo a WhatsApp...
+                </p>
             </div>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function enviarPorWhatsApp(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const asunto = document.getElementById("subject").value.trim();
+    const mensaje = document.getElementById("message").value.trim();
+
+    if (!nombre || !email || !asunto || !mensaje) {
+        alert("Por favor completá todos los campos.");
+        return;
+    }
+
+    const texto = `Hola! Soy ${encodeURIComponent(nombre)}.%0A` +
+                  `Email: ${encodeURIComponent(email)}%0A` +
+                  `Asunto: ${encodeURIComponent(asunto)}%0A` +
+                  `Mensaje:%0A${encodeURIComponent(mensaje)}`;
+
+    const telefono = "542215618670";
+    const url = `https://wa.me/${telefono}?text=${texto}`;
+
+    // Mostrar mensaje
+    const successMsg = document.getElementById("success-msg");
+    successMsg.style.display = "block";
+
+    // Limpiar formulario
+    document.getElementById("contactForm").reset();
+
+    // Ocultar el mensaje después de 5 segundos
+    setTimeout(() => {
+        successMsg.style.display = "none";
+    }, 5000);
+
+    // Abrir WhatsApp
+    setTimeout(() => {
+        window.open(url, "_blank");
+    }, 1000);
+}
+</script>
 {% endblock %}

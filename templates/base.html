@@ -1,34 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Digital Discos - Tu Disquería Online{% endblock %}</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/contacto.css') }}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="nav-container">
-                <div class="logo">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Digital Discos Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <h1 style="display:none;"> Digital Discos</h1>
-                </div>
+                <a href="/" class="logo">
+                    <span class="brand">
+                        <span class="digital">Digital</span>
+                        <span class="discos">Discos</span>
+                    </span>
+                </a>
+
                 <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/productos" class="nav-link">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/servicios" class="nav-link">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/contacto" class="nav-link">Contacto</a>
-                    </li>
+                    <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
+                    <li class="nav-item"><a href="/productos" class="nav-link">Productos</a></li>
+                    <li class="nav-item"><a href="/servicios" class="nav-link">Servicios</a></li>
+                    <li class="nav-item"><a href="/contacto" class="nav-link">Contacto</a></li>
                 </ul>
                 <div class="hamburger">
                     <span class="bar"></span>
@@ -44,29 +49,41 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Digital Discos</h3>
-                <p>Tu disquería de confianza desde siempre</p>
-            </div>
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <p><i class="fas fa-envelope"></i> info@digitaldiscos.com.ar</p>
-                <p><i class="fas fa-phone"></i> +54 11 1234-5678</p>
-            </div>
-            <div class="footer-section">
-                <h4>Síguenos</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="brand">
+    <span class="digital">Digital</span>
+    <span class="discos">Discos</span>
+</h3>
+
+            <p>Tu disquería de confianza desde siempre</p>
+        </div>
+        <div class="footer-section">
+            <h4>Contacto</h4>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:digitaldiscos.tiendavirtual@gmail.com">digitaldiscos.tiendavirtual@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i> <a href="https://wa.me/542215618670" target="_blank">+54 221 561-8670</a></p>
+        </div>
+        <div class="footer-section">
+            <h4>Síguenos</h4>
+            <div class="social-links">
+                <a href="https://www.facebook.com/pages/disqueriadigital" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com/digitaldiscos" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/542215618670" target="_blank" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Digital Discos. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Digital Discos. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

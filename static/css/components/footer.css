@@ -37,3 +37,37 @@ footer {
 .social-links a:hover {
     color: #ff8c00;
 }
+/* Línea superior naranja */
+footer {
+    border-top: 2px solid var(--color-primario);
+}
+
+/* Espaciado más compacto si lo deseás */
+.footer-content {
+    padding: 1.5rem 2rem;
+}
+
+/* Íconos sociales con mejor transición y hover */
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-primario);
+}
+.brand {
+  font-size: 1.8rem;
+  display: inline-block;
+}
+
+.brand .digital {
+  font-family: 'Audiowide', cursive;
+  color: var(--color-primario); /* opcional: o blanco si preferís */
+}
+
+.brand .discos {
+  font-family: 'Gilroy-Bold', sans-serif;
+  color: white;
+}
