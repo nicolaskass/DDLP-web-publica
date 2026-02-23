@@ -1,93 +1,130 @@
+document.addEventListener('DOMContentLoaded', function () {
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+  /* =====================================================
+     TEMA CLARO / OSCURO
+     ===================================================== */
+  const html        = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const logoImg     = document.getElementById('logo-img');
 
+  function applyTheme(theme) {
+    html.dataset.theme = theme;
+    localStorage.setItem('dd-theme', theme);
+
+    if (logoImg) {
+      logoImg.src = (theme === 'light') ? logoImg.dataset.light : logoImg.dataset.dark;
+    }
+
+    if (themeToggle) {
+      themeToggle.innerHTML = (theme === 'light')
+        ? '<i class="fas fa-moon"></i>'
+        : '<i class="fas fa-sun"></i>';
+    }
+  }
+
+  // Inicializar (el anti-flash ya aplicó el tema al html, solo actualizamos el botón/logo)
+  applyTheme(html.dataset.theme || 'dark');
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      applyTheme(html.dataset.theme === 'light' ? 'dark' : 'light');
+    });
+  }
+
+
+  /* =====================================================
+     NAVBAR — efecto al hacer scroll
+     ===================================================== */
+  const navbar = document.getElementById('navbar');
+
+  function handleNavbarScroll() {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }
+
+  window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+  handleNavbarScroll();
+
+
+  /* =====================================================
+     MENÚ MOBILE
+     ===================================================== */
+  const hamburger = document.getElementById('hamburger');
+  const navMenu   = document.getElementById('nav-menu');
+
+  if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
-    }));
-
-    // Contact form handling
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-            this.reset();
-        });
-    }
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
+      });
     });
+  }
 
-    // Carousel functionality
-    let currentSlideIndex = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-    
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        if (slides[index]) {
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-        }
-    }
-    
-    function changeSlide(direction) {
-        currentSlideIndex += direction;
-        if (currentSlideIndex >= slides.length) {
-            currentSlideIndex = 0;
-        } else if (currentSlideIndex < 0) {
-            currentSlideIndex = slides.length - 1;
-        }
-        showSlide(currentSlideIndex);
-    }
-    
-    function currentSlide(index) {
-        currentSlideIndex = index - 1;
-        showSlide(currentSlideIndex);
-    }
-    
-    // Auto-advance carousel
-    setInterval(() => {
-        changeSlide(1);
-    }, 5000);
-    
-    // Make functions global for onclick handlers
-    window.changeSlide = changeSlide;
-    window.currentSlide = currentSlide;
 
-    // Add loading animation to buttons
-    document.querySelectorAll('.btn-primary').forEach(button => {
-        button.addEventListener('click', function() {
-            if (this.textContent === 'Próximamente') {
-                this.style.background = '#666';
-                this.textContent = 'Disponible pronto...';
-                setTimeout(() => {
-                    this.style.background = '#e50914';
-                    this.textContent = 'Próximamente';
-                }, 2000);
-            }
+  /* =====================================================
+     CAROUSEL
+     ===================================================== */
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots   = document.querySelectorAll('.dot');
+  let currentSlideIndex = 0;
+  let autoPlayTimer;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    if (slides[index]) slides[index].classList.add('active');
+    if (dots[index])   dots[index].classList.add('active');
+  }
+
+  function changeSlide(direction) {
+    currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+    showSlide(currentSlideIndex);
+    resetAutoPlay();
+  }
+
+  function currentSlide(index) {
+    currentSlideIndex = index - 1;
+    showSlide(currentSlideIndex);
+    resetAutoPlay();
+  }
+
+  function resetAutoPlay() {
+    clearInterval(autoPlayTimer);
+    autoPlayTimer = setInterval(() => changeSlide(1), 5500);
+  }
+
+  if (slides.length > 0) {
+    resetAutoPlay();
+  }
+
+  window.changeSlide = changeSlide;
+  window.currentSlide = currentSlide;
+
+
+  /* =====================================================
+     SCROLL REVEAL — Intersection Observer
+     ===================================================== */
+  const revealEls = document.querySelectorAll('.reveal');
+
+  if (revealEls.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
         });
-    });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealEls.forEach(el => observer.observe(el));
+  }
+
 });

@@ -1,4 +1,5 @@
 
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -18,6 +19,14 @@ def servicios():
 @app.route('/contacto')
 def contact():
     return render_template('contact.html')
+
+@app.route('/tienda')
+def tienda():
+    return render_template('tienda.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

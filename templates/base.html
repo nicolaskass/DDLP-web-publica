@@ -1,90 +1,125 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Digital Discos - Tu Disquería Online{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Digital Discos — Tu Disquería Online{% endblock %}</title>
+  <meta name="description" content="Digital Discos — Vinilos, CDs, cassettes, audio Hi-Fi vintage y servicios de digitalización. La Plata, Buenos Aires.">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/contacto.css') }}">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+  <!-- Anti-flash: aplica tema antes de renderizar -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('dd-theme') ||
+              (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
 
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="/" class="logo">
-                    <span class="brand">
-                        <span class="digital">Digital</span>
-                        <span class="discos">Discos</span>
-                    </span>
-                </a>
 
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
-                    <li class="nav-item"><a href="/productos" class="nav-link">Productos</a></li>
-                    <li class="nav-item"><a href="/servicios" class="nav-link">Servicios</a></li>
-                    <li class="nav-item"><a href="/contacto" class="nav-link">Contacto</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+        <a href="/" class="logo">
+          <img
+            id="logo-img"
+            src="{{ url_for('static', filename='images/logo/dark.png') }}"
+            data-dark="{{ url_for('static', filename='images/logo/dark.png') }}"
+            data-light="{{ url_for('static', filename='images/logo/light.png') }}"
+            alt="Digital Discos"
+            class="logo-img"
+          >
+        </a>
 
-    <footer>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="/"          class="nav-link {% if request.path == '/' %}active{% endif %}">Inicio</a></li>
+          <li><a href="/productos" class="nav-link {% if request.path == '/productos' %}active{% endif %}">Productos</a></li>
+          <li><a href="/servicios" class="nav-link {% if request.path == '/servicios' %}active{% endif %}">Servicios</a></li>
+          <li><a href="/tienda"    class="nav-link {% if request.path == '/tienda' %}active{% endif %}">Tienda <span class="nav-badge">Próximo</span></a></li>
+          <li><a href="/blog"      class="nav-link {% if request.path == '/blog' %}active{% endif %}">Blog <span class="nav-badge">Próximo</span></a></li>
+          <li><a href="/contacto"  class="nav-link {% if request.path == '/contacto' %}active{% endif %}">Contacto</a></li>
+        </ul>
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+          <i class="fas fa-sun"></i>
+        </button>
+
+        <div class="hamburger" id="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
     <div class="footer-content">
-        <div class="footer-section">
-            <h3 class="brand">
-    <span class="digital">Digital</span>
-    <span class="discos">Discos</span>
-</h3>
-
-            <p>Tu disquería de confianza desde siempre</p>
+      <div class="footer-section">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/logo/dark.png') }}"
+            alt="Digital Discos"
+            class="logo-img-footer"
+          >
+        </a>
+        <p>Tu disquería de confianza.<br>La Plata, Buenos Aires.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <a href="mailto:digitaldiscos.tiendavirtual@gmail.com">
+          <i class="fas fa-envelope"></i>digitaldiscos.tiendavirtual@gmail.com
+        </a>
+        <a href="https://wa.me/542215618670" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i>+54 221 561-8670
+        </a>
+        <a href="https://www.google.com/maps?q=Av.+7+531+La+Plata" target="_blank" rel="noopener">
+          <i class="fas fa-map-marker-alt"></i>Av. 7, 531, La Plata
+        </a>
+      </div>
+      <div class="footer-section">
+        <h4>Navegación</h4>
+        <a href="/">Inicio</a>
+        <a href="/productos">Productos</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/tienda">Tienda</a>
+        <a href="/blog">Blog</a>
+        <a href="/contacto">Contacto</a>
+      </div>
+      <div class="footer-section">
+        <h4>Seguinos</h4>
+        <div class="social-links">
+          <a href="https://www.facebook.com/pages/disqueriadigital" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com/digitaldiscos" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/542215618670" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
         </div>
-        <div class="footer-section">
-            <h4>Contacto</h4>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:digitaldiscos.tiendavirtual@gmail.com">digitaldiscos.tiendavirtual@gmail.com</a></p>
-            <p><i class="fas fa-phone"></i> <a href="https://wa.me/542215618670" target="_blank">+54 221 561-8670</a></p>
-        </div>
-        <div class="footer-section">
-            <h4>Síguenos</h4>
-            <div class="social-links">
-                <a href="https://www.facebook.com/pages/disqueriadigital" target="_blank" aria-label="Facebook">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://instagram.com/digitaldiscos" target="_blank" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://wa.me/542215618670" target="_blank" aria-label="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 Digital Discos. Todos los derechos reservados.</p>
+      <p>&copy; 2025 Digital Discos. Todos los derechos reservados.</p>
     </div>
-</footer>
+  </footer>
 
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block scripts %}{% endblock %}
 
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

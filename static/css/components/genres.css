@@ -1,0 +1,48 @@
+.genres {
+    padding: 4rem 0;
+    background: #f0f0f0; /* Lighter background */
+}
+
+.genres h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem; /* Reduced gap */
+}
+
+.genre-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem; /* Reduced padding */
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text */
+    border-radius: 10px;
+    border: 1px solid #ddd; /* Subtle border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.genre-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
+}
+
+.genre-card i {
+    font-size: 2rem; /* Adjusted icon size */
+    color: #ff8c00;
+    margin-bottom: 0.75rem; /* Reduced margin */
+}
+
+.genre-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Adjusted font size */
+    font-weight: 600;
+}

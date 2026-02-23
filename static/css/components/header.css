@@ -16,10 +16,9 @@
     align-items: center;
 }
 
-.logo h1 {
-    color: #ff8c00;
-    font-size: 1.5rem;
-    font-family: 'Audiowide', cursive;
+.logo-img {
+    height: 40px; /* Adjust as needed */
+    width: auto;
 }
 
 .nav-menu {

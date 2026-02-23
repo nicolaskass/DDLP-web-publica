@@ -1,15 +1,16 @@
-.services {
+/* Estilos específicos para la sección de Productos */
+.products {
     padding: 4rem 0;
 }
 
-.services-grid {
+.products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.service-item {
+.product-item {
     background: #ffffff;
     padding: 2rem;
     border-radius: 12px;
@@ -19,33 +20,62 @@
     cursor: pointer; /* Indicate interactivity */
 }
 
-.service-item:hover {
+.product-item:hover {
     transform: translateY(-8px); /* More pronounced lift */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
-.service-item i {
+.product-item i {
     font-size: 2.8rem;
     color: #ff8c00;
     margin-bottom: 1rem;
 }
 
-.service-item h3 {
+.product-item h3 {
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-family: 'Audiowide', cursive;
 }
 
-.service-item p {
+.product-item p {
     font-size: 0.95rem;
     margin-bottom: 1rem;
     line-height: 1.5;
 }
 
-.service-item ul {
+.product-item ul {
     list-style-type: disc;
     padding-left: 1.2rem;
     text-align: left;
     font-size: 0.95rem;
     color: #333;
+}
+
+.coming-soon {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+    background: #fff8ee;
+    border-left: 5px solid #ff8c00;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.coming-soon h3 {
+    font-size: 1.3rem;
+    color: #ff8c00;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.coming-soon a {
+    color: #ff8c00;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.coming-soon a:hover {
+    color: #cc6b00;
 }

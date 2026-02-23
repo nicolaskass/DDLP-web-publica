@@ -1,100 +1,114 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- ======= HERO ======= -->
 <section class="hero">
-    <div class="hero-carousel">
-        <div class="carousel-container">
-            <div class="carousel-slide active">
-                <img src="{{ url_for('static', filename='images/carousel/vinilos2dopiso.jpg') }}" alt="Estantería de vinilos">
-                <div class="carousel-overlay"></div>
-            </div>
-            <div class="carousel-slide">
-                <img src="{{ url_for('static', filename='images/carousel/equipos1.jpg') }}" alt="Equipos de audio clásicos">
-                <div class="carousel-overlay"></div>
-            </div>
-            <div class="carousel-slide">
-                <img src="{{ url_for('static', filename='images/carousel/bafles.jpg') }}" alt="Parlantes vintage">
-                <div class="carousel-overlay"></div>
-            </div>
-            <div class="carousel-slide">
-                <img src="{{ url_for('static', filename='images/carousel/1erpiso.jpg') }}" alt="CDs y cassettes en exposición">
-                <div class="carousel-overlay"></div>
-            </div>
-        </div>
-        <div class="carousel-nav">
-            <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
-            <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
-        </div>
-        <div class="carousel-dots">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-        </div>
+  <div class="hero-carousel">
+    <div class="carousel-container">
+      <div class="carousel-slide active">
+        <img src="{{ url_for('static', filename='images/carousel/vinilos2dopiso.jpg') }}" alt="Estantería de vinilos">
+        <div class="carousel-overlay"></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="{{ url_for('static', filename='images/carousel/equipos1.jpg') }}" alt="Equipos de audio clásicos">
+        <div class="carousel-overlay"></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="{{ url_for('static', filename='images/carousel/bafles.jpg') }}" alt="Parlantes vintage">
+        <div class="carousel-overlay"></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="{{ url_for('static', filename='images/carousel/1erpiso.jpg') }}" alt="Primera planta de la tienda">
+        <div class="carousel-overlay"></div>
+      </div>
     </div>
-    <div class="hero-content">
-<h1 class="hero-heading">
-  Bienvenido a
-  <span class="brand">
-    <span class="digital">Digital</span>
-    <span class="discos">Discos</span>
-  </span>
-</h1>
-
-
-        <p>La mejor música en vinilo y CD. Sistemas de Audio Vintage Hi-Fi. Digitalizaciones.</p>
-        <div class="cta-buttons">
-            <a href="/productos" class="cta-button">Productos</a>
-            <a href="/servicios" class="cta-button">Servicios</a>
-        </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn prev" onclick="changeSlide(-1)" aria-label="Anterior">&#8249;</button>
+      <button class="carousel-btn next" onclick="changeSlide(1)"  aria-label="Siguiente">&#8250;</button>
     </div>
+    <div class="carousel-dots">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot"        onclick="currentSlide(2)"></span>
+      <span class="dot"        onclick="currentSlide(3)"></span>
+      <span class="dot"        onclick="currentSlide(4)"></span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">La Plata · Buenos Aires · Argentina</span>
+    <h1 class="hero-heading">
+      Bienvenido a
+      <span class="brand">
+        <span class="digital">Digital </span><span class="discos">Discos</span>
+      </span>
+    </h1>
+    <p>La mejor música en vinilo y CD. Sistemas de Audio Vintage Hi-Fi. Digitalizaciones.</p>
+    <div class="cta-buttons">
+      <a href="/productos" class="cta-button">Ver Productos</a>
+      <a href="/servicios" class="cta-button outline">Nuestros Servicios</a>
+    </div>
+  </div>
 </section>
 
+
+<!-- ======= FEATURES ======= -->
 <section class="features">
-    <div class="container">
-        <h2>¿Por qué elegir Digital Discos?</h2>
-        <div class="features-grid">
-            <div class="feature">
-                <i class="fas fa-music"></i>
-                <h3>Amplio Catálogo</h3>
-                <p>Tenemos más de 30.000 títulos en todos los géneros musicales</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-shipping-fast"></i>
-                <h3>Envío a todo el país</h3>
-                <p>Entrega de CDs y Vinilos en todo el país</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-award"></i>
-                <h3>Calidad Garantizada</h3>
-                <p>Solo productos originales</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>¿Por qué elegirnos?</h2>
+      <p>Más de una década compartiendo pasión por la música</p>
+      <div class="section-divider"></div>
     </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <i class="fas fa-record-vinyl"></i>
+        <h3>Amplio Catálogo</h3>
+        <p>Más de 30.000 títulos en todos los géneros y formatos</p>
+      </div>
+      <div class="feature reveal">
+        <i class="fas fa-shipping-fast"></i>
+        <h3>Envío a todo el país</h3>
+        <p>Entrega segura de vinilos y CDs en toda Argentina</p>
+      </div>
+      <div class="feature reveal">
+        <i class="fas fa-award"></i>
+        <h3>Calidad Garantizada</h3>
+        <p>Solo productos originales, revisados y en perfecto estado</p>
+      </div>
+    </div>
+  </div>
 </section>
 
+
+<!-- ======= GÉNEROS ======= -->
 <section class="genres">
-    <div class="container">
-        <h2>Géneros Populares</h2>
-        <div class="genres-grid">
-            <div class="genre-card"><i class="fas fa-guitar"></i><h3>Rock</h3></div>
-            <div class="genre-card"><i class="fas fa-drum"></i><h3>Pop</h3></div>
-            <div class="genre-card"><i class="fas fa-microphone"></i><h3>Jazz & Blues</h3></div>
-            <div class="genre-card"><i class="fas fa-headphones"></i><h3>Electrónica</h3></div>
-            <div class="genre-card"><i class="fas fa-violin"></i><h3>Clásica</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Rock Nacional</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Brasil</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Románticos</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Latinos</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Folklore</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Tango</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Infantiles</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Soundtracks</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Punk Rock</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Metal</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Reggae</h3></div>
-            <div class="genre-card"><i class="fas fa-music"></i><h3>Música del mundo</h3></div>
-        </div>
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Géneros Populares</h2>
+      <p>Desde el clásico rock hasta las rarezas del mundo</p>
+      <div class="section-divider"></div>
     </div>
+    <div class="genres-grid">
+      <div class="genre-card reveal"><i class="fas fa-guitar"></i><h3>Rock</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-music"></i><h3>Pop</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-microphone"></i><h3>Jazz &amp; Blues</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-headphones"></i><h3>Electrónica</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-violin"></i><h3>Clásica</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-fire"></i><h3>Rock Nacional</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-sun"></i><h3>Brasil</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-heart"></i><h3>Románticos</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-globe-americas"></i><h3>Latinos</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-leaf"></i><h3>Folklore</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-shoe-prints"></i><h3>Tango</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-star"></i><h3>Infantiles</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-film"></i><h3>Soundtracks</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-bolt"></i><h3>Punk Rock</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-dragon"></i><h3>Metal</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-cannabis"></i><h3>Reggae</h3></div>
+      <div class="genre-card reveal"><i class="fas fa-globe"></i><h3>Mundo</h3></div>
+    </div>
+  </div>
 </section>
+
 {% endblock %}
