@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────────────────────────────
+#  Digital Discos — Compose para producción
+#
+#  Infraestructura: VPS con Traefik v3 como reverse proxy
+#  App directory:   /srv/apps/digitaldiscos/digitaldiscos-website/
+#
+#  Prerequisitos:
+#    - La red Docker "web" debe existir (creada por el stack de Traefik)
+#    - DNS: digitaldiscos.com.ar → 46.225.184.116 (A record)
+#    - Copiar .env.example → .env y completar los valores
+#
+#  Deploy:
+#    docker compose up -d --build
+# ─────────────────────────────────────────────────────────────────
+
+services:
+  digitaldiscos-web:
+    build: .
+    container_name: digitaldiscos-web
+
+    # expose: declara el puerto interno para Traefik.
+    # NUNCA usar "ports:" — eso saltearía Traefik y expondría el puerto al host.
+    expose:
+      - "${APP_PORT:-5000}"
+
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - FLASK_DEBUG=false
+
+    # La app solo se conecta a la red "web" (Traefik).
+    # No tiene base de datos ni servicios internos por ahora.
+    networks:
+      - web
+
+    labels:
+      # Habilitar descubrimiento por Traefik
+      - "traefik.enable=true"
+
+      # Indicar en qué red Docker está el contenedor
+      - "traefik.docker.network=web"
+
+      # Router HTTPS
+      - "traefik.http.routers.digitaldiscos.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.digitaldiscos.entrypoints=websecure"
+      - "traefik.http.routers.digitaldiscos.tls=true"
+      - "traefik.http.routers.digitaldiscos.tls.certresolver=letsencrypt"
+
+      # Puerto interno al que Traefik envía el tráfico
+      - "traefik.http.services.digitaldiscos.loadbalancer.server.port=${APP_PORT:-5000}"
+
+    restart: unless-stopped
+
+# ─── Redes ────────────────────────────────────────────────────────
+networks:
+  web:
+    external: true   # Red pre-existente del stack de Traefik — no la creamos aquí

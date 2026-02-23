@@ -1,0 +1,34 @@
+# Control de versiones
+.git
+.gitignore
+
+# Variables de entorno locales (nunca al contenedor)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Entornos virtuales locales
+.venv
+venv
+env
+
+# IDEs y editores
+.vscode
+.idea
+*.swp
+*.swo
+
+# Documentación y archivos de desarrollo
+*.md
+attached_assets/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
