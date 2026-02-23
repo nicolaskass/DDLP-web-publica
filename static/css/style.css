@@ -336,8 +336,7 @@ img {
   width: clamp(200px, 32vw, 300px);
   height: auto;
   margin: 0 auto 1.5rem;
-  mix-blend-mode: multiply;   /* funde el fondo blanco del PNG con el overlay oscuro */
-  filter: drop-shadow(0 4px 28px rgba(0, 0, 0, 0.9));
+  filter: drop-shadow(0 4px 28px rgba(0, 0, 0, 0.8));
   animation: fadeInUp 0.8s ease-out both;
 }
 
@@ -628,10 +627,19 @@ img {
   box-shadow: var(--shadow-md);
 }
 
-.product-item i {
+.product-item i,
+.product-item svg {
   font-size: 2.6rem;
   color: var(--accent);
   margin-bottom: 1.25rem;
+}
+
+.product-item svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .product-item h3 {
