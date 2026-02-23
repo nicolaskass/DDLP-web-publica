@@ -5,15 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
      ===================================================== */
   const html        = document.documentElement;
   const themeToggle = document.getElementById('theme-toggle');
-  const logoImg     = document.getElementById('logo-img');
 
   function applyTheme(theme) {
     html.dataset.theme = theme;
     localStorage.setItem('dd-theme', theme);
-
-    if (logoImg) {
-      logoImg.src = (theme === 'light') ? logoImg.dataset.light : logoImg.dataset.dark;
-    }
 
     if (themeToggle) {
       themeToggle.innerHTML = (theme === 'light')

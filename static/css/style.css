@@ -5,6 +5,15 @@
 /* --- Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
+/* --- Fuente local: Gilroy Bold (para "Discos" en navbar y footer) --- */
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* =====================================================
    VARIABLES
    ===================================================== */
@@ -114,11 +123,30 @@ img {
 .logo {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
-.logo-img {
-  height: 44px;
-  width: auto;
+/* Texto del logo en la navbar */
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.logo-digital {
+  color: var(--accent);
+}
+
+.logo-discos {
+  font-family: 'Gilroy', 'Arial Black', sans-serif;
+  font-weight: 700;
+  color: var(--white);
+  transition: color var(--transition);
+}
+
+[data-theme="light"] .logo-discos {
+  color: var(--dark-2);
 }
 
 .nav-menu {
@@ -302,39 +330,39 @@ img {
   padding: 0 24px;
 }
 
-.hero-eyebrow {
-  display: inline-block;
-  font-size: 0.78rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-  font-weight: 500;
+/* Logo principal en el hero */
+.hero-logo-img {
+  display: block;
+  width: clamp(200px, 32vw, 300px);
+  height: auto;
+  margin: 0 auto 1.5rem;
+  mix-blend-mode: multiply;   /* funde el fondo blanco del PNG con el overlay oscuro */
+  filter: drop-shadow(0 4px 28px rgba(0, 0, 0, 0.9));
   animation: fadeInUp 0.8s ease-out both;
 }
 
-.hero-heading {
-  font-size: clamp(2rem, 5vw, 3.8rem);
-  margin-bottom: 1.25rem;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.8s ease-out 0.15s both;
-}
-
-.brand .digital {
-  color: var(--white);
-}
-
-.brand .discos {
-  color: var(--accent);
-}
-
-.hero-content p {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  margin-bottom: 2.5rem;
-  color: rgba(255, 255, 255, 0.82);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
-  animation: fadeInUp 0.8s ease-out 0.3s both;
+/* Tagline principal — debajo del logo */
+.hero-tagline {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
   font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Eyebrow — debajo del tagline, antes de los botones */
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  font-weight: 500;
+  animation: fadeInUp 0.8s ease-out 0.35s both;
+  opacity: 0.85;
 }
 
 .cta-buttons {
@@ -342,7 +370,7 @@ img {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease-out 0.45s both;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 /* Buttons */
