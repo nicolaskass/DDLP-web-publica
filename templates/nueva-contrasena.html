@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva contraseña — Digital Discos{% endblock %}
+
+{% block content %}
+<script>window.DD_API_URL = "{{ api_url }}";</script>
+<script>window.DD_RESET_TOKEN = "{{ token }}";</script>
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <h1 class="portal-title">Nueva contraseña</h1>
+    <div class="portal-divider"></div>
+
+    <div id="reset-form-wrap">
+      <p style="font-size:0.875rem;color:var(--color-text-muted,#aaa);margin-bottom:1.25rem">
+        Elegí una nueva contraseña para tu cuenta. Debe tener al menos 8 caracteres.
+      </p>
+
+      <form id="form-reset" novalidate>
+
+        <div class="portal-field" style="margin-bottom:1rem">
+          <label for="reset-password">Nueva contraseña</label>
+          <input type="password" id="reset-password" name="password"
+                 placeholder="••••••••" autocomplete="new-password" required minlength="8">
+        </div>
+
+        <div class="portal-field">
+          <label for="reset-confirm">Confirmá la contraseña</label>
+          <input type="password" id="reset-confirm" name="confirm"
+                 placeholder="••••••••" autocomplete="new-password" required minlength="8">
+        </div>
+
+        <p id="reset-msg" class="portal-msg"></p>
+
+        <button type="submit" class="btn-portal full-width" data-label="Guardar contraseña">
+          Guardar contraseña
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Success state — shown after successful reset -->
+    <div id="reset-success" style="display:none;text-align:center">
+      <p style="font-size:1.1rem;margin-bottom:1.25rem">
+        ✅ Contraseña actualizada correctamente.
+      </p>
+      <a href="/login" class="btn-portal" style="display:inline-block">
+        Iniciar sesión
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>document.body.dataset.page = 'nueva-contrasena';</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+<script>
+(function () {
+  var form    = document.getElementById('form-reset');
+  var msgEl   = document.getElementById('reset-msg');
+  var formWrap = document.getElementById('reset-form-wrap');
+  var success = document.getElementById('reset-success');
+  var token   = window.DD_RESET_TOKEN;
+
+  function showMsg(text, type) {
+    msgEl.textContent = text;
+    msgEl.className = 'portal-msg ' + (type === 'error' ? 'portal-msg--error' : 'portal-msg--success');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pw  = document.getElementById('reset-password').value;
+    var pw2 = document.getElementById('reset-confirm').value;
+
+    if (pw.length < 8) {
+      showMsg('La contraseña debe tener al menos 8 caracteres.', 'error');
+      return;
+    }
+    if (pw !== pw2) {
+      showMsg('Las contraseñas no coinciden.', 'error');
+      return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Guardando…';
+
+    fetch(DDAuth.apiUrl('/auth/reset-password/' + token + '/'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ new_password: pw }),
+    })
+    .then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d }; }); })
+    .then(function (r) {
+      if (r.status === 200) {
+        formWrap.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        showMsg(r.data.detail || 'Error al restablecer la contraseña.', 'error');
+        btn.disabled = false;
+        btn.textContent = btn.dataset.label || 'Guardar contraseña';
+      }
+    })
+    .catch(function () {
+      showMsg('Error de conexión. Intentá de nuevo.', 'error');
+      btn.disabled = false;
+      btn.textContent = btn.dataset.label || 'Guardar contraseña';
+    });
+  });
+}());
+</script>
+{% endblock %}

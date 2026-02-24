@@ -59,6 +59,10 @@ def mi_cuenta():
 def mi_historial():
     return render_template('mi-historial.html', api_url=API_URL)
 
+@app.route('/nueva-contrasena/<token>')
+def nueva_contrasena(token):
+    return render_template('nueva-contrasena.html', api_url=API_URL, token=token)
+
 
 if __name__ == '__main__':
     debug = os.environ.get('FLASK_DEBUG', 'false').lower() == 'true'
