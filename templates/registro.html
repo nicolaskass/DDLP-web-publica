@@ -59,6 +59,26 @@
 
     </form>
 
+    <!-- Google Sign-In -->
+    <div class="auth-divider"><span>o registrate con</span></div>
+
+    <div id="g_id_onload"
+         data-client_id="95650851618-frrstfptk7d7jcucpnmcp0v71q9o0ovt.apps.googleusercontent.com"
+         data-callback="handleGoogleCredential"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="filled_black"
+         data-text="signup_with"
+         data-shape="rectangular"
+         data-logo_alignment="left"
+         style="display:flex;justify-content:center;margin-bottom:0.75rem">
+    </div>
+
+    <p id="registro-google-msg" class="portal-msg"></p>
+
     <p class="auth-footer-link">
       ¿Ya tenés cuenta?
       <a href="/login">Iniciá sesión</a>
@@ -71,4 +91,5 @@
 {% block scripts %}
 <script>document.body.dataset.page = 'registro';</script>
 <script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 {% endblock %}

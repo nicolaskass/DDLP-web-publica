@@ -350,6 +350,37 @@
     return msgs.join(' ') || 'Error desconocido.';
   }
 
+  // ── Google OAuth callback (expuesto como global para Google Identity Services) ──
+
+  function handleGoogleCredential(response) {
+    var page  = document.body.dataset.page;
+    var msgId = page === 'login' ? 'login-google-msg' : 'registro-google-msg';
+
+    fetch(DDAuth.apiUrl('/auth/google/'), {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ credential: response.credential }),
+    })
+      .then(function (res) {
+        return res.json().then(function (d) { return { status: res.status, data: d }; });
+      })
+      .then(function (r) {
+        if ((r.status === 200 || r.status === 201) && r.data.access) {
+          DDAuth.setToken(r.data.access);
+          DDAuth.setUser(r.data.usuario);
+          window.location.href = '/mi-cuenta';
+        } else {
+          showMsg(msgId, r.data.detail || 'Error con Google. Intentá de nuevo.', 'error');
+        }
+      })
+      .catch(function () {
+        showMsg(msgId, 'Error de conexión. Intentá de nuevo.', 'error');
+      });
+  }
+
+  // Exponer como global para que Google Identity Services pueda invocarlo
+  window.handleGoogleCredential = handleGoogleCredential;
+
   // ── Inicialización según página ────────────────────────────────────────────
 
   document.addEventListener('DOMContentLoaded', function () {
