@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Mi cuenta — Digital Discos{% endblock %}
+
+{% block content %}
+<script>window.DD_API_URL = "{{ api_url }}";</script>
+
+<div class="portal-page">
+  <div class="portal-container">
+
+    <!-- Encabezado -->
+    <h1 class="portal-title">Mi cuenta</h1>
+    <div class="portal-divider"></div>
+
+    <!-- Tarjeta de perfil -->
+    <div class="portal-card">
+
+      <!-- Foto de perfil -->
+      <div class="perfil-foto-wrap">
+        <img id="foto-preview"
+             src="{{ url_for('static', filename='images/avatar-placeholder.png') }}"
+             alt="Foto de perfil"
+             class="perfil-foto"
+             onerror="this.style.display='none';document.getElementById('foto-placeholder').style.display='flex'">
+        <div id="foto-placeholder" class="perfil-foto-placeholder" style="display:none">
+          <i class="fas fa-user"></i>
+        </div>
+        <input type="file" id="foto-input" accept="image/jpeg,image/png,image/webp"
+               style="display:none" aria-label="Subir foto de perfil">
+        <button type="button" class="btn-foto" id="foto-btn">
+          <i class="fas fa-camera"></i> Cambiar foto
+        </button>
+      </div>
+
+      <!-- Datos de solo lectura -->
+      <div class="perfil-info-grid">
+        <div class="perfil-info-item">
+          <label>Nombre completo</label>
+          <span id="perfil-nombre">…</span>
+        </div>
+        <div class="perfil-info-item">
+          <label>Número de cliente</label>
+          <span id="perfil-numero" class="numero-cliente-chip">…</span>
+        </div>
+        <div class="perfil-info-item">
+          <label>DNI</label>
+          <span id="perfil-dni">…</span>
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(255,127,0,0.15);margin:1.25rem 0">
+
+      <!-- Datos editables -->
+      <p class="portal-form-section-title">Datos de contacto</p>
+
+      <form id="form-perfil" novalidate>
+        <div class="portal-form-grid">
+          <div class="portal-field">
+            <label for="campo-email">Correo electrónico</label>
+            <input type="email" id="campo-email" name="email"
+                   placeholder="tu@correo.com" autocomplete="email">
+          </div>
+          <div class="portal-field">
+            <label for="campo-whatsapp">WhatsApp</label>
+            <input type="tel" id="campo-whatsapp" name="whatsapp"
+                   placeholder="+54 9 11 1234-5678" autocomplete="tel">
+          </div>
+          <div class="portal-field">
+            <label for="campo-telefono">Teléfono fijo</label>
+            <input type="tel" id="campo-telefono" name="telefono_fijo"
+                   placeholder="011 4567-8900">
+          </div>
+          <div class="portal-field full-width">
+            <label for="campo-direccion">Dirección</label>
+            <input type="text" id="campo-direccion" name="direccion"
+                   placeholder="Av. Corrientes 1234, Buenos Aires">
+          </div>
+        </div>
+
+        <p id="perfil-msg" class="portal-msg"></p>
+
+        <div style="display:flex;gap:1rem;margin-top:1.25rem;flex-wrap:wrap">
+          <button type="submit" class="btn-portal" data-label="Guardar cambios">
+            <i class="fas fa-save"></i> Guardar cambios
+          </button>
+          <a href="/mi-historial" class="btn-portal btn-portal-outline">
+            <i class="fas fa-history"></i> Ver mi historial
+          </a>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- Enlace de salida -->
+    <p style="text-align:right;margin-top:0.75rem">
+      <a href="#" id="btn-salir-pagina" style="color:#999;font-size:0.85rem;text-decoration:none">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>document.body.dataset.page = 'mi-cuenta';</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+<script>
+  // Botón de salir en la página
+  document.getElementById('btn-salir-pagina').addEventListener('click', function (e) {
+    e.preventDefault();
+    DDAuth.logout();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Crear cuenta — Digital Discos{% endblock %}
+
+{% block content %}
+<script>window.DD_API_URL = "{{ api_url }}";</script>
+
+<div class="auth-page">
+  <div class="auth-card" style="max-width:520px">
+
+    <h1 class="portal-title">Crear cuenta</h1>
+    <div class="portal-divider"></div>
+
+    <form id="form-registro" novalidate>
+
+      <div class="portal-form-grid" style="margin-bottom:1rem">
+        <div class="portal-field">
+          <label for="reg-nombre">Nombre <span style="color:#f44336">*</span></label>
+          <input type="text" id="reg-nombre" name="nombre"
+                 placeholder="Juan" autocomplete="given-name" required>
+        </div>
+        <div class="portal-field">
+          <label for="reg-apellido">Apellido <span style="color:#f44336">*</span></label>
+          <input type="text" id="reg-apellido" name="apellido"
+                 placeholder="García" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="portal-field" style="margin-bottom:1rem">
+        <label for="reg-email">Correo electrónico <span style="color:#f44336">*</span></label>
+        <input type="email" id="reg-email" name="email"
+               placeholder="tu@correo.com" autocomplete="email" required>
+      </div>
+
+      <div class="portal-field" style="margin-bottom:1rem">
+        <label for="reg-password">Contraseña <span style="color:#f44336">*</span></label>
+        <input type="password" id="reg-password" name="password"
+               placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
+      </div>
+
+      <div class="portal-form-grid" style="margin-bottom:1rem">
+        <div class="portal-field">
+          <label for="reg-whatsapp">WhatsApp <span style="color:#999;font-weight:400">(opcional)</span></label>
+          <input type="tel" id="reg-whatsapp" name="whatsapp"
+                 placeholder="+54 9 11 1234-5678" autocomplete="tel">
+        </div>
+        <div class="portal-field">
+          <label for="reg-dni">DNI <span style="color:#999;font-weight:400">(opcional)</span></label>
+          <input type="text" id="reg-dni" name="dni"
+                 placeholder="12345678" inputmode="numeric">
+        </div>
+      </div>
+
+      <p id="registro-msg" class="portal-msg"></p>
+
+      <button type="submit" class="btn-portal full-width" data-label="Crear cuenta">
+        Crear cuenta
+      </button>
+
+    </form>
+
+    <p class="auth-footer-link">
+      ¿Ya tenés cuenta?
+      <a href="/login">Iniciá sesión</a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>document.body.dataset.page = 'registro';</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+{% endblock %}

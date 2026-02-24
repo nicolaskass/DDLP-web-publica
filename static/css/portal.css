@@ -1,0 +1,382 @@
+/* ============================================================
+   portal.css — Estilos del portal de clientes Digital Discos
+   Paleta: fondo #0f0f0f / #1a1a1a, acento #ff7f00, texto #fff
+   Tipografía: Poppins (body), Audiowide (headings de marca)
+   ============================================================ */
+
+/* ── Variables (hereda del tema del sitio) ──────────────────── */
+:root {
+  --portal-card-bg:      #1a1a1a;
+  --portal-card-border:  rgba(255, 127, 0, 0.18);
+  --portal-accent:       #ff7f00;
+  --portal-accent-dark:  #d96a00;
+  --portal-text:         #ffffff;
+  --portal-text-muted:   #999;
+  --portal-input-bg:     #242424;
+  --portal-input-border: #3a3a3a;
+  --portal-radius:       12px;
+  --portal-radius-sm:    8px;
+  --portal-shadow:       0 4px 24px rgba(0, 0, 0, 0.4);
+}
+[data-theme="light"] {
+  --portal-card-bg:      #ffffff;
+  --portal-card-border:  rgba(255, 127, 0, 0.25);
+  --portal-text:         #2c2c2c;
+  --portal-text-muted:   #666;
+  --portal-input-bg:     #f7f7f7;
+  --portal-input-border: #d0d0d0;
+}
+
+/* ── Navbar: enlace de autenticación ────────────────────────── */
+.nav-link-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nav-link-salir {
+  opacity: 0.75;
+}
+.nav-link-salir:hover {
+  opacity: 1;
+  color: var(--portal-accent) !important;
+}
+
+/* ── Layout de página portal ────────────────────────────────── */
+.portal-page {
+  min-height: 100vh;
+  padding-top: 90px;   /* altura navbar */
+  padding-bottom: 4rem;
+  background: var(--dark, #0f0f0f);
+}
+[data-theme="light"] .portal-page {
+  background: #f7f7f7;
+}
+
+.portal-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.portal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--portal-text);
+  margin-bottom: 0.25rem;
+}
+.portal-subtitle {
+  font-size: 0.9rem;
+  color: var(--portal-text-muted);
+  margin-bottom: 2rem;
+}
+.portal-divider {
+  width: 44px;
+  height: 3px;
+  background: var(--portal-accent);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+/* ── Tarjeta ────────────────────────────────────────────────── */
+.portal-card {
+  background: var(--portal-card-bg);
+  border: 1px solid var(--portal-card-border);
+  border-radius: var(--portal-radius);
+  padding: 2rem;
+  box-shadow: var(--portal-shadow);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Foto de perfil ─────────────────────────────────────────── */
+.perfil-foto-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  gap: 0.75rem;
+}
+.perfil-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--portal-accent);
+  background: #242424;
+}
+.perfil-foto-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #242424;
+  border: 3px solid var(--portal-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--portal-accent);
+}
+.btn-foto {
+  background: transparent;
+  border: 1.5px dashed var(--portal-accent);
+  color: var(--portal-accent);
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--portal-radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-foto:hover {
+  background: rgba(255, 127, 0, 0.12);
+}
+
+/* ── Campos de solo lectura ─────────────────────────────────── */
+.perfil-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 540px) {
+  .perfil-info-grid { grid-template-columns: 1fr; }
+}
+.perfil-info-item label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--portal-text-muted);
+  margin-bottom: 0.25rem;
+}
+.perfil-info-item span {
+  font-size: 0.95rem;
+  color: var(--portal-text);
+  font-weight: 500;
+}
+
+/* ── Formularios ────────────────────────────────────────────── */
+.portal-form-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--portal-accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--portal-card-border);
+}
+.portal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 540px) {
+  .portal-form-grid { grid-template-columns: 1fr; }
+}
+.portal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.portal-field.full-width {
+  grid-column: 1 / -1;
+}
+.portal-field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--portal-text-muted);
+}
+.portal-field input,
+.portal-field textarea {
+  background: var(--portal-input-bg);
+  border: 1.5px solid var(--portal-input-border);
+  color: var(--portal-text);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--portal-radius-sm);
+  font-size: 0.92rem;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.portal-field input:focus,
+.portal-field textarea:focus {
+  outline: none;
+  border-color: var(--portal-accent);
+  box-shadow: 0 0 0 3px rgba(255, 127, 0, 0.12);
+}
+
+/* ── Botón primario ─────────────────────────────────────────── */
+.btn-portal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--portal-accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--portal-radius-sm);
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+.btn-portal:hover {
+  background: var(--portal-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 127, 0, 0.35);
+}
+.btn-portal:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-portal-outline {
+  background: transparent;
+  border: 2px solid var(--portal-accent);
+  color: var(--portal-accent);
+}
+.btn-portal-outline:hover {
+  background: rgba(255, 127, 0, 0.1);
+}
+
+/* ── Mensajes de estado ─────────────────────────────────────── */
+.portal-msg {
+  font-size: 0.88rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--portal-radius-sm);
+  margin-top: 0.75rem;
+  display: none;
+}
+.portal-msg-success {
+  background: rgba(0, 170, 0, 0.12);
+  border: 1px solid rgba(0, 170, 0, 0.3);
+  color: #4caf50;
+}
+.portal-msg-error {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  color: #f44336;
+}
+.portal-error {
+  color: #f44336;
+  font-size: 0.9rem;
+}
+
+/* ── Historial: timeline ────────────────────────────────────── */
+.historial-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--portal-card-border);
+}
+.historial-item:last-child { border-bottom: none; }
+
+.historial-fecha {
+  flex: 0 0 auto;
+  width: 90px;
+  font-size: 0.78rem;
+  color: var(--portal-text-muted);
+  padding-top: 0.2rem;
+  text-align: right;
+}
+.historial-body {
+  flex: 1;
+}
+.historial-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+.historial-detalle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--portal-text);
+}
+
+/* Badge colors */
+.badge-compra        { background: rgba(255, 127, 0, 0.18); color: #ff7f00; }
+.badge-venta         { background: rgba(0, 102, 255, 0.15); color: #4d88ff; }
+.badge-digitalizacion{ background: rgba(160, 32, 240, 0.15); color: #c06aff; }
+.badge-orden         { background: rgba(160, 32, 240, 0.12); color: #b05ae0; }
+.badge-presupuesto   { background: rgba(0, 170, 170, 0.15); color: #00bcd4; }
+.badge-pago          { background: rgba(0, 170, 0, 0.15); color: #4caf50; }
+.badge-consulta      { background: rgba(255, 200, 0, 0.15); color: #ffc107; }
+.badge-default       { background: rgba(255,255,255,0.08); color: #aaa; }
+
+/* Loading / empty states */
+.historial-loading,
+.historial-empty {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--portal-text-muted);
+  font-size: 0.95rem;
+}
+.historial-loading i { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+/* ── Páginas de acceso (login / registro) ───────────────────── */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 1.5rem 3rem;
+  background: var(--dark, #0f0f0f);
+}
+[data-theme="light"] .auth-page { background: #f7f7f7; }
+
+.auth-card {
+  background: var(--portal-card-bg);
+  border: 1px solid var(--portal-card-border);
+  border-radius: var(--portal-radius);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--portal-shadow);
+  width: 100%;
+  max-width: 440px;
+}
+.auth-card .portal-title {
+  text-align: center;
+  margin-bottom: 0.2rem;
+}
+.auth-card .portal-divider {
+  margin: 0 auto 1.75rem;
+}
+.auth-footer-link {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+  color: var(--portal-text-muted);
+}
+.auth-footer-link a {
+  color: var(--portal-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-footer-link a:hover { text-decoration: underline; }
+.btn-portal.full-width { width: 100%; margin-top: 1rem; }
+
+/* ── Número de cliente en el perfil ────────────────────────── */
+.numero-cliente-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 127, 0, 0.12);
+  border: 1px solid rgba(255, 127, 0, 0.3);
+  color: var(--portal-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}

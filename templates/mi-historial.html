@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Mi historial — Digital Discos{% endblock %}
+
+{% block content %}
+<script>window.DD_API_URL = "{{ api_url }}";</script>
+
+<div class="portal-page">
+  <div class="portal-container">
+
+    <!-- Encabezado -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:0.25rem">
+      <h1 class="portal-title" style="margin-bottom:0">Mi historial</h1>
+      <a href="/mi-cuenta" class="btn-portal btn-portal-outline" style="padding:0.5rem 1.2rem;font-size:0.85rem">
+        <i class="fas fa-arrow-left"></i> Volver a mi cuenta
+      </a>
+    </div>
+    <p class="portal-subtitle">Todas tus compras, ventas y servicios con Digital Discos.</p>
+    <div class="portal-divider"></div>
+
+    <!-- Tarjeta de historial -->
+    <div class="portal-card">
+
+      <!-- Estado de carga -->
+      <div id="historial-loading" class="historial-loading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <p>Cargando tu historial…</p>
+      </div>
+
+      <!-- Estado vacío (oculto por defecto) -->
+      <div id="historial-empty" class="historial-empty" style="display:none">
+        <i class="fas fa-inbox" style="font-size:2.5rem;color:#444;display:block;margin-bottom:0.75rem"></i>
+        Todavía no tenés actividad registrada.
+      </div>
+
+      <!-- Lista de eventos -->
+      <div id="historial-container"></div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>document.body.dataset.page = 'mi-historial';</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+{% endblock %}

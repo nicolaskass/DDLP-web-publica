@@ -17,6 +17,7 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -40,6 +41,22 @@
           <li><a href="/tienda"    class="nav-link {% if request.path == '/tienda' %}active{% endif %}">Tienda <span class="nav-badge">Próximo</span></a></li>
           <li><a href="/blog"      class="nav-link {% if request.path == '/blog' %}active{% endif %}">Blog <span class="nav-badge">Próximo</span></a></li>
           <li><a href="/contacto"  class="nav-link {% if request.path == '/contacto' %}active{% endif %}">Contacto</a></li>
+          <!-- Portal: se muestra/oculta con JS según si hay sesión activa -->
+          <li class="nav-auth-guest" style="display:none">
+            <a href="/login" class="nav-link nav-link-auth {% if request.path == '/login' %}active{% endif %}">
+              <i class="fas fa-user"></i> Iniciar sesión
+            </a>
+          </li>
+          <li class="nav-auth-user" style="display:none">
+            <a href="/mi-cuenta" class="nav-link nav-link-auth {% if request.path.startswith('/mi-') %}active{% endif %}">
+              <i class="fas fa-user-circle"></i> <span id="nav-nombre-usuario">Mi cuenta</span>
+            </a>
+          </li>
+          <li class="nav-auth-user" style="display:none">
+            <a href="#" class="nav-link nav-link-auth nav-link-salir" id="btn-salir">
+              <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
+          </li>
         </ul>
 
         <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
@@ -114,6 +131,7 @@
   </footer>
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
   {% block scripts %}{% endblock %}
 
 </body>

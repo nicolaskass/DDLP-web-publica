@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión — Digital Discos{% endblock %}
+
+{% block content %}
+<script>window.DD_API_URL = "{{ api_url }}";</script>
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <h1 class="portal-title">Iniciar sesión</h1>
+    <div class="portal-divider"></div>
+
+    <form id="form-login" novalidate>
+
+      <div class="portal-field" style="margin-bottom:1rem">
+        <label for="login-email">Correo electrónico</label>
+        <input type="email" id="login-email" name="email"
+               placeholder="tu@correo.com" autocomplete="email" required>
+      </div>
+
+      <div class="portal-field">
+        <label for="login-password">Contraseña</label>
+        <input type="password" id="login-password" name="password"
+               placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+
+      <p id="login-msg" class="portal-msg"></p>
+
+      <button type="submit" class="btn-portal full-width" data-label="Entrar">
+        Entrar
+      </button>
+
+    </form>
+
+    <p class="auth-footer-link">
+      ¿No tenés cuenta?
+      <a href="/registro">Registrate gratis</a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>document.body.dataset.page = 'login';</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+{% endblock %}
