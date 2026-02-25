@@ -48,18 +48,12 @@
       });
     }
 
-    // Preview + upload automático al seleccionar foto
+    // Al seleccionar foto → abrir modal de recorte
     if (fotoInput) {
       fotoInput.addEventListener('change', function () {
         var file = fotoInput.files[0];
         if (!file) return;
-        // Preview inmediato
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          if (fotoPreview) fotoPreview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-        uploadPhoto(file);
+        openCropModal(file);
       });
     }
 
@@ -82,7 +76,7 @@
         if (!data) return;
         setField('perfil-numero',  data.numero_cliente);
         setField('perfil-nombre',  data.nombre + ' ' + data.apellido);
-        setField('perfil-dni',     data.dni || '—');
+        setInputVal('campo-dni',      data.dni);
         setInputVal('campo-email',    data.email);
         setInputVal('campo-whatsapp', data.whatsapp);
         setInputVal('campo-telefono', data.telefono_fijo);
@@ -100,10 +94,12 @@
 
   function saveProfile() {
     var payload = {};
+    var dni      = getInputVal('campo-dni');
     var email    = getInputVal('campo-email');
     var whatsapp = getInputVal('campo-whatsapp');
     var telefono = getInputVal('campo-telefono');
     var direccion= getInputVal('campo-direccion');
+    if (dni      !== null) payload.dni            = dni;
     if (email    !== null) payload.email         = email;
     if (whatsapp !== null) payload.whatsapp      = whatsapp;
     if (telefono !== null) payload.telefono_fijo = telefono;
@@ -120,6 +116,79 @@
       .catch(function () {
         showMsg('perfil-msg', 'Error al guardar. Intentá de nuevo.', 'error');
       });
+  }
+
+  // ── Crop modal (Cropper.js) ────────────────────────────────────────────────
+
+  var _cropper = null;
+
+  function openCropModal(file) {
+    var modal    = document.getElementById('crop-modal');
+    var cropImg  = document.getElementById('crop-image');
+    var btnOk    = document.getElementById('crop-confirm');
+    var btnCancel= document.getElementById('crop-cancel');
+    if (!modal || !cropImg) { uploadPhoto(file); return; }   // fallback sin modal
+
+    // Cargar imagen
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      cropImg.src = e.target.result;
+      modal.style.display = '';
+
+      // Destruir instancia previa
+      if (_cropper) { _cropper.destroy(); _cropper = null; }
+
+      // Crear cropper circular
+      _cropper = new Cropper(cropImg, {
+        aspectRatio: 1,
+        viewMode: 1,
+        dragMode: 'move',
+        cropBoxResizable: true,
+        cropBoxMovable: true,
+        guides: false,
+        center: true,
+        highlight: false,
+        background: false,
+        autoCropArea: 0.85,
+        responsive: true,
+      });
+    };
+    reader.readAsDataURL(file);
+
+    // Confirmar recorte
+    function onConfirm() {
+      if (!_cropper) return;
+      _cropper.getCroppedCanvas({
+        width: 512,
+        height: 512,
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
+      }).toBlob(function (blob) {
+        // Preview inmediato
+        var fotoPreview = document.getElementById('foto-preview');
+        if (fotoPreview) {
+          fotoPreview.src = URL.createObjectURL(blob);
+          fotoPreview.style.display = '';
+          var placeholder = document.getElementById('foto-placeholder');
+          if (placeholder) placeholder.style.display = 'none';
+        }
+        uploadPhoto(blob);
+        closeCropModal();
+      }, 'image/jpeg', 0.92);
+    }
+
+    function closeCropModal() {
+      modal.style.display = 'none';
+      if (_cropper) { _cropper.destroy(); _cropper = null; }
+      btnOk.removeEventListener('click', onConfirm);
+      btnCancel.removeEventListener('click', closeCropModal);
+      // Limpiar input para permitir re-selección del mismo archivo
+      var fotoInput = document.getElementById('foto-input');
+      if (fotoInput) fotoInput.value = '';
+    }
+
+    btnOk.addEventListener('click', onConfirm);
+    btnCancel.addEventListener('click', closeCropModal);
   }
 
   function uploadPhoto(file) {

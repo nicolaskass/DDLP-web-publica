@@ -400,3 +400,68 @@
   border-radius: 20px;
   letter-spacing: 0.5px;
 }
+
+/* ── Modal de recorte de foto ──────────────────────────────── */
+.crop-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crop-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+.crop-modal-content {
+  position: relative;
+  background: var(--portal-card-bg, #1a1a1a);
+  border: 1px solid var(--portal-card-border);
+  border-radius: var(--portal-radius);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+.crop-modal-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--portal-text);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+.crop-container {
+  width: 100%;
+  max-height: 350px;
+  overflow: hidden;
+  border-radius: var(--portal-radius-sm);
+  background: #000;
+}
+.crop-container img {
+  display: block;
+  max-width: 100%;
+}
+.crop-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.crop-actions .btn-portal,
+.crop-actions .btn-portal-outline {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.88rem;
+}
+
+/* Cropper.js circular view-box override */
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
+}
+.cropper-view-box {
+  box-shadow: 0 0 0 1px #ff7f00;
+  outline: 0;
+}

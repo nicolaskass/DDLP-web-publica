@@ -42,19 +42,21 @@
           <label>Número de cliente</label>
           <span id="perfil-numero" class="numero-cliente-chip">…</span>
         </div>
-        <div class="perfil-info-item">
-          <label>DNI</label>
-          <span id="perfil-dni">…</span>
-        </div>
       </div>
 
       <hr style="border-color:rgba(255,127,0,0.15);margin:1.25rem 0">
 
       <!-- Datos editables -->
-      <p class="portal-form-section-title">Datos de contacto</p>
+      <p class="portal-form-section-title">Datos personales y contacto</p>
 
       <form id="form-perfil" novalidate>
         <div class="portal-form-grid">
+          <div class="portal-field">
+            <label for="campo-dni">DNI</label>
+            <input type="text" id="campo-dni" name="dni"
+                   placeholder="12345678" autocomplete="off"
+                   inputmode="numeric" pattern="[0-9.]*">
+          </div>
           <div class="portal-field">
             <label for="campo-email">Correo electrónico</label>
             <input type="email" id="campo-email" name="email"
@@ -98,6 +100,23 @@
       </a>
     </p>
 
+  </div>
+</div>
+
+<!-- Modal de recorte de foto (tipo WhatsApp) -->
+<div id="crop-modal" class="crop-modal" style="display:none">
+  <div class="crop-modal-overlay"></div>
+  <div class="crop-modal-content">
+    <h3 class="crop-modal-title">Recortar foto de perfil</h3>
+    <div class="crop-container">
+      <img id="crop-image" alt="Recortar">
+    </div>
+    <div class="crop-actions">
+      <button type="button" id="crop-cancel" class="btn-portal btn-portal-outline">Cancelar</button>
+      <button type="button" id="crop-confirm" class="btn-portal">
+        <i class="fas fa-check"></i> Confirmar
+      </button>
+    </div>
   </div>
 </div>
 {% endblock %}
