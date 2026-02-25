@@ -64,6 +64,14 @@ def nueva_contrasena(token):
     return render_template('nueva-contrasena.html', api_url=API_URL, token=token)
 
 
+# ─── QR scan público ──────────────────────────────────────────────────────────
+
+@app.route('/scan/<qr_code>')
+def scan(qr_code):
+    """Página pública de producto escaneado por QR. Sin autenticación."""
+    return render_template('scan.html', api_url=API_URL, qr_code=qr_code)
+
+
 if __name__ == '__main__':
     debug = os.environ.get('FLASK_DEBUG', 'false').lower() == 'true'
     app.run(host='0.0.0.0', port=5000, debug=debug)
