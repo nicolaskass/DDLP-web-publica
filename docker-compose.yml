@@ -27,6 +27,7 @@ services:
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - FLASK_DEBUG=false
+      - API_URL=${API_URL:-https://digi.digitaldiscos.com.ar/api}
 
     # La app solo se conecta a la red "web" (Traefik).
     # No tiene base de datos ni servicios internos por ahora.
