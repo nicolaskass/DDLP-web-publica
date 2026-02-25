@@ -7,6 +7,7 @@
 #  Prerequisitos:
 #    - La red Docker "web" debe existir (creada por el stack de Traefik)
 #    - DNS: digitaldiscos.com.ar → 46.225.184.116 (A record)
+#    - DNS: eshop.digitaldiscos.com.ar → 46.225.184.116 (A record)
 #    - Copiar .env.example → .env y completar los valores
 #
 #  Deploy:
@@ -39,13 +40,23 @@ services:
       # Indicar en qué red Docker está el contenedor
       - "traefik.docker.network=web"
 
-      # Router HTTPS
+      # Router principal: digitaldiscos.com.ar → web pública (landing, servicios, portal)
       - "traefik.http.routers.digitaldiscos.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.digitaldiscos.entrypoints=websecure"
       - "traefik.http.routers.digitaldiscos.tls=true"
       - "traefik.http.routers.digitaldiscos.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.digitaldiscos.service=digitaldiscos"
 
-      # Puerto interno al que Traefik envía el tráfico
+      # Router eshop: eshop.digitaldiscos.com.ar → mismo contenedor Flask por ahora.
+      # Sirve /scan/<qr_code> para los QR públicos.
+      # Cuando se construya el eshop real, este router se elimina y se despliega una app nueva.
+      - "traefik.http.routers.digitaldiscos-eshop.rule=Host(`eshop.digitaldiscos.com.ar`)"
+      - "traefik.http.routers.digitaldiscos-eshop.entrypoints=websecure"
+      - "traefik.http.routers.digitaldiscos-eshop.tls=true"
+      - "traefik.http.routers.digitaldiscos-eshop.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.digitaldiscos-eshop.service=digitaldiscos"
+
+      # Puerto interno al que Traefik envía el tráfico (compartido por ambos routers)
       - "traefik.http.services.digitaldiscos.loadbalancer.server.port=${APP_PORT:-5000}"
 
     restart: unless-stopped
