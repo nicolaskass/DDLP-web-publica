@@ -1,0 +1,137 @@
+Claude’s Plan
+Plan: STATMAN v1.0 — Analytics Dashboard MVP
+Context
+El usuario quiere iniciar STATMAN, el módulo de estadísticas/analytics de DIGI. La necesidad inmediata es analytics operacional: cuántos productos se cargaron en cuánto tiempo, precios actualizados, etiquetas impresas, distribución por categoría/estantería/género/artista/formato/país, etc.
+
+No se necesita un app Django complejo — todos los datos ya existen en ProductV2, ImportSession, PrintJob, Venta, OrdenTrabajo. STATMAN v1 es una capa de agregación read-only sobre modelos existentes.
+
+Hay un get_catalog_statistics endpoint existente en INVMAN que ya hace agregación MongoDB (by_category, by_type). STATMAN lo amplía significativamente.
+
+Backend: Nuevo app statman (sin modelos, solo vistas de agregación)
+Archivos a crear
+backend/statman/__init__.py — vacío
+backend/statman/apps.py — StatmanConfig
+backend/statman/urls.py — rutas
+backend/statman/views.py — Endpoint único con MongoDB aggregation pipelines
+Archivos a modificar
+backend/digi/settings/base.py → Agregar 'statman' a INSTALLED_APPS (línea ~41)
+backend/digi/urls.py → Agregar path('api/statman/', include('statman.urls')) (línea ~33)
+Endpoint: GET /api/statman/dashboard/
+Un solo endpoint que retorna todo el dashboard en una llamada. Usa MongoDB $facet aggregation para eficiencia (una query, múltiples resultados).
+
+Secciones del response:
+
+inventory — Totales y distribuciones de ProductV2
+
+total_products, by_category, by_type
+by_genre (top 20, from data.genre)
+by_artist (top 20, from data.artist)
+by_country (all, from data.country)
+by_format (all, from data.format)
+by_location (all, from data.location)
+price_stats: avg/min/max USD + cash, total inventory value
+labels_printed / labels_not_printed counts
+products_by_month: timeline de creación (from created_at)
+imports — De ImportSession
+
+total_sessions, total_products_imported
+by_month (timeline)
+recent_sessions (últimas 5)
+avg_quality_score
+qr_labels — De PrintJob collection
+
+total_print_jobs, total_labels_printed
+by_month (timeline)
+sales — De Venta (si hay datos)
+
+total_ventas, total_revenue
+by_payment_status, by_tipo_venta
+ventas_by_month
+services — De OrdenTrabajo + Presupuesto (si hay datos)
+
+total_ordenes, by_estado
+total_presupuestos, presupuestos_by_estado
+Modelos usados (imports en views.py):
+
+invman.models.ProductV2 — inventory stats
+invman.models.ImportSession — import stats
+posman.models.Venta — sales stats
+diman.models.OrdenTrabajo, Presupuesto — service stats
+PrintJob: acceso directo a MongoDB collection via get_db()
+Frontend: Dashboard page con widgets
+Archivos a crear
+frontend/src/modules/statman/pages/StatmanDashboard.jsx — Página principal
+frontend/src/modules/statman/components/StatCard.jsx — Card reutilizable (número grande + label + subtexto)
+frontend/src/modules/statman/components/HorizontalBarChart.jsx — Barras horizontales CSS-only (para distribuciones)
+frontend/src/modules/statman/components/TimelineChart.jsx — Barras verticales por mes CSS-only
+Archivos a modificar
+frontend/src/App.jsx → Agregar import + <Route path="/statman/*" element={<StatmanDashboard />} />
+frontend/src/components/Navbar.jsx → Agregar statmanLinks array + dropdown con ChartBarIcon
+Layout del Dashboard
+
+┌─────────────────────────────────────────────────────────┐
+│  📊 STATMAN — Estadísticas Generales                    │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│ StatCard     │ StatCard     │ StatCard     │ StatCard   │
+│ 1627         │ 45           │ $13,800      │ 3200       │
+│ Productos    │ Ventas       │ Valor USD    │ Etiquetas  │
+├──────────────┴──────────────┴──────────────┴────────────┤
+│ 📈 Productos Cargados por Mes (TimelineChart)           │
+├────────────────────────┬────────────────────────────────┤
+│ 📦 Por Categoría       │ 🎼 Top Géneros                │
+│ (HorizontalBarChart)   │ (HorizontalBarChart)          │
+├────────────────────────┼────────────────────────────────┤
+│ 🎤 Top Artistas        │ 🌍 Por País (with flags)      │
+│ (HorizontalBarChart)   │ (HorizontalBarChart)          │
+├────────────────────────┼────────────────────────────────┤
+│ 💿 Por Formato          │ 📍 Por Ubicación             │
+│ (HorizontalBarChart)   │ (HorizontalBarChart)          │
+├────────────────────────┴────────────────────────────────┤
+│ 📊 Importaciones (timeline + recent sessions table)     │
+├────────────────────────┬────────────────────────────────┤
+│ 🏷️ Etiquetas QR        │ 💰 Ventas por Mes             │
+│ (impresas vs pending)  │ (TimelineChart si hay datos)  │
+└────────────────────────┴────────────────────────────────┘
+Sin librería de charts — CSS-only (barras horizontales con % width, barras verticales con % height). Mismo approach que CatalogStatisticsPanel.
+
+Usa getCountryFlag() de invman/utils/countryFlags.js para flags en distribución por país.
+
+Orden de Ejecución
+#	Tarea	Archivos
+1	Crear app statman (boilerplate)	__init__.py, apps.py
+2	Escribir views.py con aggregation pipelines	statman/views.py
+3	URLs + registrar en settings y urls.py	statman/urls.py, settings/base.py, digi/urls.py
+4	Crear componentes frontend (StatCard, HorizontalBarChart, TimelineChart)	frontend/src/modules/statman/components/
+5	Crear StatmanDashboard page	frontend/src/modules/statman/pages/StatmanDashboard.jsx
+6	Agregar ruta + navbar link	App.jsx, Navbar.jsx
+7	Commit y push	
+Verificación
+GET /api/statman/dashboard/ retorna JSON completo con las 5 secciones
+Visitar /statman en el browser → Dashboard carga con todos los widgets
+Los conteos de productos coinciden con CatalogStatisticsPanel
+La timeline de importaciones coincide con CSVman import history
+El navbar muestra enlace a STATMAN
+Las banderas de países aparecen en la distribución por país
+User approved the plan
+Update Todos
+
+Create statman backend app (boilerplate + views.py with MongoDB aggregations)
+
+Register statman in settings.py, urls.py
+
+Create frontend components (StatCard, HorizontalBarChart, TimelineChart)
+
+Create StatmanDashboard page
+
+Add route in App.jsx + navbar link in Navbar.jsx
+
+Commit and push
+Let me first quickly check the PrintJob model and collection name, and look at the OrdenTrabajo/Presupuesto/Venta model imports:
+
+Grep "class PrintJob|class QRScanEvent"" (in /home/miklos/Documents/vs-code-github/digitaldiscos/apps/digi/DIGI/backend/invman/models.py)
+1 line of output
+Grep "class PrintJob"" (in /home/miklos/Documents/vs-code-github/digitaldiscos/apps/digi/DIGI/backend)
+1 line of output
+Grep "PrintJob|print_job"" (in /home/miklos/Documents/vs-code-github/digitaldiscos/apps/digi/DIGI/backend/invman/qrman_views.py)
+9 lines of output
+You're out of extra usage · resets 11pm (America/Buenos_Aires)
